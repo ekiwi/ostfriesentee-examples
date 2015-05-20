@@ -1,3 +1,6 @@
 [submodule "ostfriesentee"]
 	path = ostfriesentee
 	url = git@github.com:RWTH-OS/ostfriesentee.git
+[submodule "ext/RIOT"]
+	path = ext/RIOT
+	url = git@github.com:RIOT-OS/RIOT.git
