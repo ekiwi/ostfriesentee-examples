@@ -1,0 +1,3 @@
+[submodule "ostfriesentee"]
+	path = ostfriesentee
+	url = git@github.com:RWTH-OS/ostfriesentee.git
