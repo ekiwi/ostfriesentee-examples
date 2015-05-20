@@ -22,7 +22,7 @@ import os
 Import('env')
 
 # build base lib
-base_lib = SConscript(['../../infuser/lib/base/SConscript'], exports = 'env')
+base_lib = SConscript(['../../ostfriesentee/lib/base/SConscript'], exports = 'env')
 
 
 helloworld = env.OstfriesenteeApplication('helloworld', ['java'], OFT_LIBS=['base'])

@@ -19,7 +19,7 @@
 
 import os
 
-env = Environment(toolpath = [os.path.join('..', '..', 'infuser', 'scons')], tools = ['default', 'ostfriesentee'])
+env = Environment(toolpath = [os.path.join('..', '..', 'ostfriesentee', 'scons')], tools = ['default', 'ostfriesentee'])
 
 helloworld = SConscript(['SConscript'], exports = 'env')
 
