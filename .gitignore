@@ -1,0 +1,14 @@
+# gedit
+*~
+
+# python
+*.pyc
+
+# scons
+.sconsign.dblite
+build/
+
+# eclipse
+.classpath
+.project
+.settings
