@@ -21,10 +21,10 @@ import os
 
 Import('env')
 
-# build base lib
 base_lib = SConscript(['../../ostfriesentee/lib/base/SConscript'], exports = 'env')
+ostfriesentee_lib = SConscript(['../../ostfriesentee/lib/ostfriesentee/SConscript'], exports = 'env')
 
 
-helloworld = env.OstfriesenteeApplication('helloworld', ['java'], OFT_LIBS=['base'])
+helloworld = env.OstfriesenteeApplication('helloworld', ['java'], OFT_LIBS=['base', 'ostfriesentee'])
 
 Return('helloworld')
