@@ -25,6 +25,7 @@
 #include <stdbool.h>
 
 #include "jlib_base.h"
+#include "jlib_ostfriesentee.h"
 
 #include "types.h"
 #include "vm.h"
@@ -87,7 +88,8 @@ int main(int argc,char* argv[])
 	dj_exec_setVM(vm);
 
 	dj_named_native_handler handlers[] = {
-			{ "base", &base_native_handler }
+			{ "base", &base_native_handler },
+			{ "ostfriesentee", &ostfriesentee_native_handler }
 		};
 
 	int length = sizeof(handlers)/ sizeof(handlers[0]);

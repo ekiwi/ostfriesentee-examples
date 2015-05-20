@@ -32,22 +32,26 @@ app_di = os.path.join(env['OFT_BUILDPATH'], 'app', app_name, app_name + '.di')
 base_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base', 'base.di')
 base_lib_inc = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base')
 base_lib_a   = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base', 'libbase.a')
+oft_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee', 'ostfriesentee.di')
+oft_lib_inc = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee')
+oft_lib_a   = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee', 'libostfriesentee.a')
 
 # build c
 c_env = env.Clone()
 c_env.VariantDir(variant_dir='build/posix', src_dir='src')
 c_env.Append(CPPPATH = base_lib_inc)
+c_env.Append(CPPPATH = oft_lib_inc)
 c_env.Append(CPPPATH = [os.path.abspath('../ostfriesentee/vm/c')])
 
 # put all di files into single object file
 # TODO: HACK: all libs/apps hardcoded
-infusions = [base_lib_di, app_di]
-archive = env.Command("build/posix/generated/di_archive.ar", infusions, "ar rc $TARGET $SOURCES")
+infusions = [base_lib_di, oft_lib_di, app_di]
+archive = env.Command("build/posix/generated/di_archive.ar", infusions, "ar rcf $TARGET $SOURCES")
 di_c_array = env.CArray("build/posix/generated/di_archive.c", archive)
 
-c_env.AppendUnique(LIBS = vm + [c_env.File(base_lib_a)])
+c_env.AppendUnique(LIBS = vm + [c_env.File(base_lib_a), c_env.File(oft_lib_a)])
 
-posix = c_env.Program('build/posix/main', env.Glob('build/posix/*.c') + di_c_array)
+posix = c_env.Program('build/posix/main', env.Glob('build/posix/*.c') + [di_c_array])
 
 
 Return('posix')
