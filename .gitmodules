@@ -4,3 +4,6 @@
 [submodule "ext/RIOT"]
 	path = ext/RIOT
 	url = git@github.com:RIOT-OS/RIOT.git
+[submodule "ext/xpcc"]
+	path = ext/xpcc
+	url = git@github.com:roboterclubaachen/xpcc.git
