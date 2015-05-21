@@ -27,7 +27,7 @@ MAIN_FUNCTION
 	// initialize Uart1 for XPCC_LOG_
 	GpioOutputA9::connect(Usart1::Tx);
 	GpioInputA10::connect(Usart1::Rx, Gpio::InputType::PullUp);
-	Usart1::initialize<defaultSystemClock, 115200>(12);
+	Usart1::initialize<defaultSystemClock, 115200>();
 
 	XPCC_LOG_INFO << "Ostfriesentee on STM32F3 powered by xpcc." << xpcc::endl;
 

@@ -5,6 +5,13 @@ import os
 env = Environment(toolpath = [os.path.join('..', 'ostfriesentee', 'scons')], tools = ['default', 'ostfriesentee'])
 env.Architecture("cortex-m4f")
 
+# debug build
+env['CFLAGS'].append("-O0")
+env['CFLAGS'].append("-g")
+
+# pack structs
+env['CFLAGS'].append("-DPACK_STRUCTS")
+
 app_name = 'helloworld'
 
 # dependencies
@@ -41,6 +48,10 @@ env.Append(CPPPATH = env_oft['CPPPATH'])
 env.Append(CPPPATH = [base_lib_inc])
 env.Append(CPPPATH = [oft_lib_inc])
 env.AppendUnique(LIBS = vm + [env.File(base_lib_a), env.File(oft_lib_a)])
+
+# debug build
+env['CXXFLAGS'].append("-O0")
+env['CXXFLAGS'].append("-g")
 
 # build the program
 program = env.Program(target = env['XPCC_CONFIG']['general']['name'], source = files.sources)
