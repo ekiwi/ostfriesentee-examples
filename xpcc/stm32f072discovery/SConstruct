@@ -3,14 +3,17 @@ import os
 
 # build ostfriesentee
 env = Environment(toolpath = [os.path.join('..', '..', 'ostfriesentee', 'scons')], tools = ['default', 'ostfriesentee'])
-env.Architecture("cortex-m4f")
+env.Architecture("cortex-m0")
 
 # debug build
 env['CFLAGS'].append("-O0")
 env['CFLAGS'].append("-g")
 
 # pack structs
-env['CFLAGS'].append("-DPACK_STRUCTS")
+#env['CFLAGS'].append("-DPACK_STRUCTS")
+
+# cortex-m0 does not support unaligned access
+env['CFLAGS'].append("-DALIGN_32")
 
 app_name = 'helloworld'
 
