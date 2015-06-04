@@ -1,6 +1,6 @@
 #include <xpcc/architecture.hpp>
 #include <xpcc/debug/logger.hpp>
-#include "../../ext/xpcc/examples/stm32f3_discovery/stm32f3_discovery.hpp"
+#include "../../../ext/xpcc/examples/stm32f3_discovery/stm32f3_discovery.hpp"
 
 // ----------------------------------------------------------------------------
 // Set the log level
