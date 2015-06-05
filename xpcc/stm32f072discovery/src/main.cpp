@@ -2,10 +2,12 @@
 #include <xpcc/debug/logger.hpp>
 #include "../../../ext/xpcc/examples/stm32f072_discovery/stm32f072_discovery.hpp"
 
+
+#include <stdarg.h>	// for va_list
 // ----------------------------------------------------------------------------
 // Set the log level
 #undef	XPCC_LOG_LEVEL
-#define	XPCC_LOG_LEVEL xpcc::log::INFO
+#define	XPCC_LOG_LEVEL xpcc::log::DEBUG
 
 
 // Create an IODeviceWrapper around the Uart Peripheral we want to use
@@ -56,6 +58,17 @@ ssize_t write(int /*fildes*/, const void *buf, size_t nbyte)
 	return nbyte;
 }
 
+extern "C"
+int debug_printf(const char * format, ...) {
+	va_list ap;
+	va_start(ap, format);
+
+	XPCC_LOG_DEBUG.printf(format, ap);
+
+	va_end(ap);
+
+	return 0;
+}
 
 extern "C"
 void dj_panic(int32_t panictype)
