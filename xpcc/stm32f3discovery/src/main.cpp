@@ -5,7 +5,7 @@
 // ----------------------------------------------------------------------------
 // Set the log level
 #undef	XPCC_LOG_LEVEL
-#define	XPCC_LOG_LEVEL xpcc::log::INFO
+#define	XPCC_LOG_LEVEL xpcc::log::DEBUG
 
 
 // Create an IODeviceWrapper around the Uart Peripheral we want to use
@@ -60,6 +60,18 @@ ssize_t write(int /*fildes*/, const void *buf, size_t nbyte)
 		XPCC_LOG_INFO << str[ii];
 	}
 	return nbyte;
+}
+
+extern "C"
+int debug_printf(const char * format, ...) {
+	va_list ap;
+	va_start(ap, format);
+
+	XPCC_LOG_DEBUG.printf(format, ap);
+
+	va_end(ap);
+
+	return 0;
 }
 
 
