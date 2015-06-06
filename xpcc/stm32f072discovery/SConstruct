@@ -10,7 +10,7 @@ env['CFLAGS'].append("-O0")
 env['CFLAGS'].append("-g")
 
 # pack structs
-#env['CFLAGS'].append("-DPACK_STRUCTS")
+# env['CFLAGS'].append("-DPACK_STRUCTS")
 
 # cortex-m0 does not support unaligned access
 env['CFLAGS'].append("-DALIGN_32")

@@ -55,6 +55,7 @@ ssize_t write(int /*fildes*/, const void *buf, size_t nbyte)
 	for(int ii = 0; ii < nbyte; ++ii) {
 		XPCC_LOG_INFO << str[ii];
 	}
+
 	return nbyte;
 }
 
@@ -69,6 +70,7 @@ int debug_printf(const char * format, ...) {
 
 	return 0;
 }
+
 
 extern "C"
 void dj_panic(int32_t panictype)
