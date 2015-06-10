@@ -24,5 +24,5 @@ from checker import Checker
 
 if __name__ == "__main__":
 	c = Checker()
-	c.run(['app', 'posix'])
+	c.run(['app', 'posix', 'xpcc'])
 	sys.exit(c.printreport())
