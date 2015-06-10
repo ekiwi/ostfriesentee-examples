@@ -19,6 +19,10 @@ extern size_t di_archive_size;
 static uint8_t mem[MEMSIZE];
 
 void runOstfriesentee() {
+	// print object sizes to UART
+	dj_print_type_sizes();
+
+
 	dj_vm * vm;
 	dj_object * obj;
 
