@@ -10,9 +10,10 @@ env['CFLAGS'].append("-O0")
 env['CFLAGS'].append("-g")
 
 # pack structs
-env['CFLAGS'].append("-DPACK_STRUCTS")
+env['CFLAGS'].append("-DALIGN_32")
 
-app_name = 'helloworld'
+#app_name = 'helloworld'
+app_name = 'benchmark'
 
 # dependencies
 vm = SConscript(['../../ostfriesentee/vm/SConscript'], exports = 'env')
