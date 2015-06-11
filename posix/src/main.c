@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdarg.h>
 
 #include "jlib_base.h"
 #include "jlib_ostfriesentee.h"
@@ -88,3 +89,15 @@ int main(int argc,char* argv[])
 
 	return 0;
 }
+
+int debug_printf(const char * format, ...) {
+	va_list ap;
+	va_start(ap, format);
+
+	vprintf(format, ap);
+
+	va_end(ap);
+
+	return 0;
+}
+
