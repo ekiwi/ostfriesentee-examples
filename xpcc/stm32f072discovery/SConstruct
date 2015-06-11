@@ -15,7 +15,8 @@ env['CFLAGS'].append("-g")
 # cortex-m0 does not support unaligned access
 env['CFLAGS'].append("-DALIGN_32")
 
-app_name = 'helloworld'
+#app_name = 'helloworld'
+app_name = 'benchmark'
 
 # dependencies
 vm = SConscript(['../../ostfriesentee/vm/SConscript'], exports = 'env')
