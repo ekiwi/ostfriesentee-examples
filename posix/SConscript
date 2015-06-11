@@ -22,8 +22,8 @@ import os
 Import('env')
 
 #app_name = 'helloworld'
-app_name = 'benchmark'
-
+#app_name = 'benchmark'
+app_name = 'testsuite'
 
 # dependencies
 vm = SConscript(['../ostfriesentee/vm/SConscript'], exports = 'env')
