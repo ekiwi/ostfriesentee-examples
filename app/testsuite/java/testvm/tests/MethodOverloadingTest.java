@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 
 public class MethodOverloadingTest
@@ -51,10 +51,10 @@ public class MethodOverloadingTest
 	public static void test(int testBase)
 	{
 		MethodOverloadingTest test = new MethodOverloadingTest();
-		Darjeeling.assertTrue(testBase + 0, test.test()==0);
-		Darjeeling.assertTrue(testBase + 1, test.test(null)==1);
-		Darjeeling.assertTrue(testBase + 2, test.test(0,0)==2);
-		Darjeeling.assertTrue(testBase + 3, test.test(0,0,0)==3);
+		Ostfriesentee.assertTrue(testBase + 0, test.test()==0);
+		Ostfriesentee.assertTrue(testBase + 1, test.test(null)==1);
+		Ostfriesentee.assertTrue(testBase + 2, test.test(0,0)==2);
+		Ostfriesentee.assertTrue(testBase + 3, test.test(0,0,0)==3);
 		
 	}
 

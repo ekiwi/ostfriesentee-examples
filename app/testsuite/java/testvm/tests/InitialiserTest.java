@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 public class InitialiserTest
 {
@@ -42,11 +42,11 @@ public class InitialiserTest
 	
 	public static void test(int testBase)
 	{
-		Darjeeling.assertTrue(testBase + 0, a==100);
-		Darjeeling.assertTrue(testBase + 1, b==20);
-		Darjeeling.assertTrue(testBase + 2, new InitTest().a==123);
-		Darjeeling.assertTrue(testBase + 3, new InitTest().poepjes==1);
-		Darjeeling.assertTrue(testBase + 4, InitTest.poepjes==1);
+		Ostfriesentee.assertTrue(testBase + 0, a==100);
+		Ostfriesentee.assertTrue(testBase + 1, b==20);
+		Ostfriesentee.assertTrue(testBase + 2, new InitTest().a==123);
+		Ostfriesentee.assertTrue(testBase + 3, new InitTest().poepjes==1);
+		Ostfriesentee.assertTrue(testBase + 4, InitTest.poepjes==1);
 	}
 
 }

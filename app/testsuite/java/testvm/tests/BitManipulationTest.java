@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 import testvm.classes.Child;
 
@@ -34,13 +34,13 @@ public class BitManipulationTest {
 			for (int j = 0; j < child.getBytes().length; j ++)
 			child.setCongested(true);
 			child.getBytes()[0] = 0;
-			Darjeeling.assertTrue(testBase + i*4, child.getCongested());
+			Ostfriesentee.assertTrue(testBase + i*4, child.getCongested());
 			child.setCongested(false);
-			Darjeeling.assertTrue(testBase + i*4 + 1, !child.getCongested());
+			Ostfriesentee.assertTrue(testBase + i*4 + 1, !child.getCongested());
 			child.setRoutingPull(true);
-			Darjeeling.assertTrue(testBase + i*4 + 2, child.getRoutingPull());
+			Ostfriesentee.assertTrue(testBase + i*4 + 2, child.getRoutingPull());
 			child.setRoutingPull(false);
-			Darjeeling.assertTrue(testBase + i*4 + 3, !child.getRoutingPull());
+			Ostfriesentee.assertTrue(testBase + i*4 + 3, !child.getRoutingPull());
 		}
 	}
 }

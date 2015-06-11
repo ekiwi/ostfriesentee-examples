@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 import testvm.classes.TreeNode;
 
@@ -58,7 +58,7 @@ public class StackUsageTest implements Runnable
 	{
 		synchronized(lock)
 		{
-            Darjeeling.assertTrue(testBase+0, true);
+            Ostfriesentee.assertTrue(testBase+0, true);
             byte numbers[] = new byte[] { 21,6,36,76,7,97,94,30,90,86,13,80,84,79,28,55,36,95,23 };
 			
 			TreeNode rootNode = new TreeNode(numbers[0]);
@@ -77,11 +77,11 @@ public class StackUsageTest implements Runnable
 				isAscending &= numbers[i]<=numbers[i+1];
 				
 			threads--;
-            Darjeeling.assertTrue(testBase+1, true);
+            Ostfriesentee.assertTrue(testBase+1, true);
 		}
-        Darjeeling.assertTrue(testBase+2, true);
+        Ostfriesentee.assertTrue(testBase+2, true);
 		while (threads>0);
-        Darjeeling.assertTrue(testBase+3, true);
+        Ostfriesentee.assertTrue(testBase+3, true);
 
 	}
 
@@ -104,7 +104,7 @@ public class StackUsageTest implements Runnable
             }
         }
 
-        Darjeeling.assertTrue(testBase+99,true);
+        Ostfriesentee.assertTrue(testBase+99,true);
         
 	}
 

@@ -21,7 +21,7 @@
  
 package testvm;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 import testvm.tests.AlignmentTest;
 import testvm.tests.ArithmeticTest;
@@ -70,9 +70,9 @@ public class TestSuite
 //			InfusionTest.test(2000);
 		} catch (Throwable t)
 		{
-			Darjeeling.print("Uncaught throwable: " + t.getMessage());
+			Ostfriesentee.print("Uncaught throwable: " + t.getMessage());
 		}
-		Darjeeling.print("All testsuites have passed succsessfuly.\n");
+		Ostfriesentee.print("All testsuites have passed succsessfuly.\n");
 	}
 
 	public static void main(String[] args)
@@ -81,7 +81,7 @@ public class TestSuite
 			test();
 		} catch (Throwable t)
 		{
-			Darjeeling.print(t.toString());
+			Ostfriesentee.print(t.toString());
 		}
 	}
 }

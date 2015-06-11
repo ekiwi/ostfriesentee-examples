@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 import testvm.classes.ByteTwiddle;
 
 public class AlignmentTest
@@ -46,7 +46,7 @@ public class AlignmentTest
                 bt.setFieldByte(i3);
                 bt.setFieldShort(i5);
                 bt.setFieldInt(i7);
-                Darjeeling.assertTrue(testNr++, 2*3*4*5*6*7==bt.getProduct());
+                Ostfriesentee.assertTrue(testNr++, 2*3*4*5*6*7==bt.getProduct());
                 //bytes as return arguments, and static+field getters
                 int product = bt.getStaticByte();
                 product *= bt.getStaticShort();
@@ -54,10 +54,10 @@ public class AlignmentTest
                 product *= bt.getFieldByte();
                 product *= bt.getFieldShort();
                 product *= bt.getFieldInt();
-                Darjeeling.assertTrue(testNr++, 2*3*4*5*6*7==product);
+                Ostfriesentee.assertTrue(testNr++, 2*3*4*5*6*7==product);
                 //function arguments with odd number of bytes
                 int ret = bt.setArray((short)0x55aa,(byte)1,(byte)(2),(byte)3,(short)0x55aa);
-                Darjeeling.assertTrue(testNr++, ret == 0x55aa*0x55aa);
+                Ostfriesentee.assertTrue(testNr++, ret == 0x55aa*0x55aa);
         }
 
         public static void test(int testBase)

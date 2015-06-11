@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 public class SwitchTest
 {
@@ -35,11 +35,11 @@ public class SwitchTest
 		{
 			switch(i)
 			{
-				case 0: Darjeeling.assertTrue(testNr, i==0); break;
-				case 1: Darjeeling.assertTrue(testNr, i==1); break;
-				case 2: Darjeeling.assertTrue(testNr, i==2); break;
-				case 3: Darjeeling.assertTrue(testNr, i==3); break;
-				default: Darjeeling.assertTrue(testNr, i<0||i>=8); break;
+				case 0: Ostfriesentee.assertTrue(testNr, i==0); break;
+				case 1: Ostfriesentee.assertTrue(testNr, i==1); break;
+				case 2: Ostfriesentee.assertTrue(testNr, i==2); break;
+				case 3: Ostfriesentee.assertTrue(testNr, i==3); break;
+				default: Ostfriesentee.assertTrue(testNr, i<0||i>=8); break;
 			}
 			testNr++;
 		}
@@ -49,15 +49,15 @@ public class SwitchTest
 		{
 			switch(i)
 			{
-				case 000: Darjeeling.assertTrue(testNr, i==000); break;
-				case 100: Darjeeling.assertTrue(testNr, i==100); break;
-				case 200: Darjeeling.assertTrue(testNr, i==200); break;
-				case 300: Darjeeling.assertTrue(testNr, i==300); break;
-				case 400: Darjeeling.assertTrue(testNr, i==400); break;
-				case 500: Darjeeling.assertTrue(testNr, i==500); break;
-				case 600: Darjeeling.assertTrue(testNr, i==600); break;
-				case 700: Darjeeling.assertTrue(testNr, i==700); break;
-				default: Darjeeling.assertTrue(testNr, i<0||i>700); break;
+				case 000: Ostfriesentee.assertTrue(testNr, i==000); break;
+				case 100: Ostfriesentee.assertTrue(testNr, i==100); break;
+				case 200: Ostfriesentee.assertTrue(testNr, i==200); break;
+				case 300: Ostfriesentee.assertTrue(testNr, i==300); break;
+				case 400: Ostfriesentee.assertTrue(testNr, i==400); break;
+				case 500: Ostfriesentee.assertTrue(testNr, i==500); break;
+				case 600: Ostfriesentee.assertTrue(testNr, i==600); break;
+				case 700: Ostfriesentee.assertTrue(testNr, i==700); break;
+				default: Ostfriesentee.assertTrue(testNr, i<0||i>700); break;
 			}
 			testNr++;
 		}

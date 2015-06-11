@@ -21,7 +21,7 @@
  
 package testvm.md5;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 public class MD5
 {
@@ -91,27 +91,27 @@ public class MD5
 	public static void testMany(int testBase)
 	{
 
-		Darjeeling.assertTrue(testBase+0, testItem(
+		Ostfriesentee.assertTrue(testBase+0, testItem(
 				new byte[] {},
 				new byte[] { (byte)0xd4, (byte)0x1d, (byte)0x8c, (byte)0xd9, (byte)0x8f, (byte)0x00, (byte)0xb2, (byte)0x04, (byte)0xe9, (byte)0x80, (byte)0x09, (byte)0x98, (byte)0xec, (byte)0xf8, (byte)0x42, (byte)0x7e }
 				));
 		
-		Darjeeling.assertTrue(testBase+1, testItem(
+		Ostfriesentee.assertTrue(testBase+1, testItem(
 				new byte[] { (byte)'a' },
 				new byte[] { (byte)0x0c, (byte)0xc1, (byte)0x75, (byte)0xb9, (byte)0xc0, (byte)0xf1, (byte)0xb6, (byte)0xa8, (byte)0x31, (byte)0xc3, (byte)0x99, (byte)0xe2, (byte)0x69, (byte)0x77, (byte)0x26, (byte)0x61 }
 				));
 
-		Darjeeling.assertTrue(testBase+2, testItem(
+		Ostfriesentee.assertTrue(testBase+2, testItem(
 				new byte[] { (byte)'a', (byte)'b', (byte)'c'  },
 				new byte[] { (byte)0x90, (byte)0x01, (byte)0x50, (byte)0x98, (byte)0x3c, (byte)0xd2, (byte)0x4f, (byte)0xb0, (byte)0xd6, (byte)0x96, (byte)0x3f, (byte)0x7d, (byte)0x28, (byte)0xe1, (byte)0x7f, (byte)0x72 }
 				));
 
-		Darjeeling.assertTrue(testBase+3, testItem(
+		Ostfriesentee.assertTrue(testBase+3, testItem(
 				new byte[] { (byte)'m', (byte)'e', (byte)'s', (byte)'s', (byte)'a', (byte)'g', (byte)'e', (byte)' ', (byte)'d', (byte)'i', (byte)'g', (byte)'e', (byte)'s', (byte)'t' },
 				new byte[] { (byte)0xf9, (byte)0x6b, (byte)0x69, (byte)0x7d, (byte)0x7c, (byte)0xb7, (byte)0x93, (byte)0x8d, (byte)0x52, (byte)0x5a, (byte)0x2f, (byte)0x31, (byte)0xaa, (byte)0xf1, (byte)0x61, (byte)0xd0 }
 				));
 		
-		Darjeeling.assertTrue(testBase+4, testItem(
+		Ostfriesentee.assertTrue(testBase+4, testItem(
 				new byte[] { (byte)'d', (byte)'a', (byte)'r', (byte)'j', (byte)'e', (byte)'e', (byte)'l', (byte)'i', (byte)'n', (byte)'g' },
 				new byte[] { (byte)0xb9, (byte)0xcc, (byte)0xe4, (byte)0x72, (byte)0xb9, (byte)0x7d, (byte)0x91, (byte)0x58, (byte)0xd0, (byte)0x78, (byte)0x6a, (byte)0xcf, (byte)0x37, (byte)0xce, (byte)0x6a, (byte)0xe3 }
 				));

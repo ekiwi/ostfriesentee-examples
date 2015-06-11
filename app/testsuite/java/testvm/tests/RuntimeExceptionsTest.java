@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 import testvm.classes.A;
 import testvm.classes.B;
@@ -71,13 +71,13 @@ public class RuntimeExceptionsTest
 		try {
 			A a = new A();
 			B b = (B)a;
-			Darjeeling.assertTrue(testBase + 0, false);
+			Ostfriesentee.assertTrue(testBase + 0, false);
 		} catch (ClassCastException ex)
 		{
-			Darjeeling.assertTrue(testBase + 0, true);
+			Ostfriesentee.assertTrue(testBase + 0, true);
 		} catch (Exception ex)
 		{
-			Darjeeling.assertTrue(testBase + 0, false);
+			Ostfriesentee.assertTrue(testBase + 0, false);
 		
 		}
 		// finally in method test
@@ -85,10 +85,10 @@ public class RuntimeExceptionsTest
 		try {
 			finallyTest = new FinallyTest();
 			finallyTest.test();
-			Darjeeling.assertTrue(testBase + 1, false);
+			Ostfriesentee.assertTrue(testBase + 1, false);
 		} catch (RuntimeException ex)
 		{
-			Darjeeling.assertTrue(testBase + 1, finallyTest.finallyCalled==2);
+			Ostfriesentee.assertTrue(testBase + 1, finallyTest.finallyCalled==2);
 		}
 		
 		// thread state exception test
@@ -109,25 +109,25 @@ public class RuntimeExceptionsTest
 			// try re-starting the thread
 			thread.start();
 			
-			Darjeeling.assertTrue(testBase + 2, false);
+			Ostfriesentee.assertTrue(testBase + 2, false);
 		} catch (IllegalThreadStateException ex)
 		{
-			Darjeeling.assertTrue(testBase + 2, true);
+			Ostfriesentee.assertTrue(testBase + 2, true);
 		} catch (Throwable t)
 		{
-			Darjeeling.assertTrue(testBase + 2, false);
+			Ostfriesentee.assertTrue(testBase + 2, false);
 		}
 		
 		// out of stack space test
 		try {
 			recurse();
-			Darjeeling.assertTrue(testBase + 3, false);
+			Ostfriesentee.assertTrue(testBase + 3, false);
 		} catch (StackOverflowError err)
 		{
-			Darjeeling.assertTrue(testBase + 3, true);
+			Ostfriesentee.assertTrue(testBase + 3, true);
 		} catch (OutOfMemoryError t)
 		{
-			Darjeeling.assertTrue(testBase + 3, true);
+			Ostfriesentee.assertTrue(testBase + 3, true);
 		}
 		
 	}

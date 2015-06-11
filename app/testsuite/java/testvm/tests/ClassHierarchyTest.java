@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 import testvm.classes.A;
 import testvm.classes.AInterface;
@@ -82,34 +82,34 @@ public class ClassHierarchyTest
 		String str = new String();
 		Inner inner = new Inner();
 		
-		Darjeeling.assertTrue(testBase +  0, a instanceof A);  
-		Darjeeling.assertTrue(testBase +  1, !(a instanceof B));
-		Darjeeling.assertTrue(testBase +  2, b instanceof A);
-		Darjeeling.assertTrue(testBase +  3, b instanceof B);
+		Ostfriesentee.assertTrue(testBase +  0, a instanceof A);  
+		Ostfriesentee.assertTrue(testBase +  1, !(a instanceof B));
+		Ostfriesentee.assertTrue(testBase +  2, b instanceof A);
+		Ostfriesentee.assertTrue(testBase +  3, b instanceof B);
 
-		Darjeeling.assertTrue(testBase +  4, c instanceof A);
-		Darjeeling.assertTrue(testBase +  5, c instanceof B);
-		Darjeeling.assertTrue(testBase +  6, c instanceof C);
-		Darjeeling.assertTrue(testBase +  7, !(c instanceof D));
+		Ostfriesentee.assertTrue(testBase +  4, c instanceof A);
+		Ostfriesentee.assertTrue(testBase +  5, c instanceof B);
+		Ostfriesentee.assertTrue(testBase +  6, c instanceof C);
+		Ostfriesentee.assertTrue(testBase +  7, !(c instanceof D));
 
-		Darjeeling.assertTrue(testBase +  8, d instanceof A);
-		Darjeeling.assertTrue(testBase +  9, d instanceof B);
-		Darjeeling.assertTrue(testBase + 10, d instanceof C);
-		Darjeeling.assertTrue(testBase + 11, d instanceof D);
+		Ostfriesentee.assertTrue(testBase +  8, d instanceof A);
+		Ostfriesentee.assertTrue(testBase +  9, d instanceof B);
+		Ostfriesentee.assertTrue(testBase + 10, d instanceof C);
+		Ostfriesentee.assertTrue(testBase + 11, d instanceof D);
 		
 		// test if INSTANCEOF also works across infusions 
-		Darjeeling.assertTrue(testBase + 12, str instanceof String);
+		Ostfriesentee.assertTrue(testBase + 12, str instanceof String);
 
 		// test if INSTANCEOF also works for inner classes (should be trivial)
 		// and across infusions (inner's parent is from the system infusion)
-		Darjeeling.assertTrue(testBase + 13, inner instanceof Sub);
+		Ostfriesentee.assertTrue(testBase + 13, inner instanceof Sub);
 				
-		Darjeeling.assertTrue(testBase + 14, !(null instanceof A));
-		Darjeeling.assertTrue(testBase + 15, !(null instanceof Object));
+		Ostfriesentee.assertTrue(testBase + 14, !(null instanceof A));
+		Ostfriesentee.assertTrue(testBase + 15, !(null instanceof Object));
 
 		// any object should be an instance of java.lang.Object 
-		Darjeeling.assertTrue(testBase + 16, a instanceof Object);
-		Darjeeling.assertTrue(testBase + 17, b instanceof Object);
+		Ostfriesentee.assertTrue(testBase + 16, a instanceof Object);
+		Ostfriesentee.assertTrue(testBase + 17, b instanceof Object);
 	}
 
 	private static void arrayInstanceOfTest(int testBase)
@@ -119,22 +119,22 @@ public class ClassHierarchyTest
 		B[] bb = new B[10];
 		C[] cc = new C[10];
 		D[] dd = new D[10];
-		Darjeeling.assertTrue(testBase +  0, aa instanceof A[]);
-		Darjeeling.assertTrue(testBase +  1, !(aa instanceof B[]));
+		Ostfriesentee.assertTrue(testBase +  0, aa instanceof A[]);
+		Ostfriesentee.assertTrue(testBase +  1, !(aa instanceof B[]));
 		
-		Darjeeling.assertTrue(testBase +  2, bb instanceof A[]);
-		Darjeeling.assertTrue(testBase +  3, bb instanceof B[]);
-		Darjeeling.assertTrue(testBase +  4, !(bb instanceof C[]));
+		Ostfriesentee.assertTrue(testBase +  2, bb instanceof A[]);
+		Ostfriesentee.assertTrue(testBase +  3, bb instanceof B[]);
+		Ostfriesentee.assertTrue(testBase +  4, !(bb instanceof C[]));
 		
-		Darjeeling.assertTrue(testBase +  5, cc instanceof A[]);
-		Darjeeling.assertTrue(testBase +  6, cc instanceof B[]);
-		Darjeeling.assertTrue(testBase +  7, cc instanceof C[]);
-		Darjeeling.assertTrue(testBase +  8, !(cc instanceof D[]));
+		Ostfriesentee.assertTrue(testBase +  5, cc instanceof A[]);
+		Ostfriesentee.assertTrue(testBase +  6, cc instanceof B[]);
+		Ostfriesentee.assertTrue(testBase +  7, cc instanceof C[]);
+		Ostfriesentee.assertTrue(testBase +  8, !(cc instanceof D[]));
 
-		Darjeeling.assertTrue(testBase +  9, dd instanceof A[]);
-		Darjeeling.assertTrue(testBase + 10, dd instanceof B[]);
-		Darjeeling.assertTrue(testBase + 11, dd instanceof C[]);
-		Darjeeling.assertTrue(testBase + 12, dd instanceof D[]);
+		Ostfriesentee.assertTrue(testBase +  9, dd instanceof A[]);
+		Ostfriesentee.assertTrue(testBase + 10, dd instanceof B[]);
+		Ostfriesentee.assertTrue(testBase + 11, dd instanceof C[]);
+		Ostfriesentee.assertTrue(testBase + 12, dd instanceof D[]);
 		
 		// check int array forms  
 		Object inta = new int[10];
@@ -142,27 +142,27 @@ public class ClassHierarchyTest
 		Object intbl = new boolean[10];
 		Object ints = new short[10];
 
-		Darjeeling.assertTrue(testBase + 13, inta instanceof int[]);
-		Darjeeling.assertTrue(testBase + 14, !(inta instanceof byte[]));
-		Darjeeling.assertTrue(testBase + 15, !(inta instanceof boolean[]));
-		Darjeeling.assertTrue(testBase + 16, !(inta instanceof short[]));
-		Darjeeling.assertTrue(testBase + 17, !(inta instanceof A));
-		Darjeeling.assertTrue(testBase + 18, inta instanceof Object);
+		Ostfriesentee.assertTrue(testBase + 13, inta instanceof int[]);
+		Ostfriesentee.assertTrue(testBase + 14, !(inta instanceof byte[]));
+		Ostfriesentee.assertTrue(testBase + 15, !(inta instanceof boolean[]));
+		Ostfriesentee.assertTrue(testBase + 16, !(inta instanceof short[]));
+		Ostfriesentee.assertTrue(testBase + 17, !(inta instanceof A));
+		Ostfriesentee.assertTrue(testBase + 18, inta instanceof Object);
 
-		Darjeeling.assertTrue(testBase + 19, !(intb instanceof int[]));
-		Darjeeling.assertTrue(testBase + 20, intb instanceof byte[]);
-		Darjeeling.assertTrue(testBase + 21, !(intb instanceof boolean[]));
-		Darjeeling.assertTrue(testBase + 22, !(intb instanceof short[]));
+		Ostfriesentee.assertTrue(testBase + 19, !(intb instanceof int[]));
+		Ostfriesentee.assertTrue(testBase + 20, intb instanceof byte[]);
+		Ostfriesentee.assertTrue(testBase + 21, !(intb instanceof boolean[]));
+		Ostfriesentee.assertTrue(testBase + 22, !(intb instanceof short[]));
 
-		Darjeeling.assertTrue(testBase + 23, !(intbl instanceof int[]));
-		Darjeeling.assertTrue(testBase + 24, !(intbl instanceof byte[]));
-		Darjeeling.assertTrue(testBase + 25, intbl instanceof boolean[]);
-		Darjeeling.assertTrue(testBase + 26, !(intbl instanceof short[]));
+		Ostfriesentee.assertTrue(testBase + 23, !(intbl instanceof int[]));
+		Ostfriesentee.assertTrue(testBase + 24, !(intbl instanceof byte[]));
+		Ostfriesentee.assertTrue(testBase + 25, intbl instanceof boolean[]);
+		Ostfriesentee.assertTrue(testBase + 26, !(intbl instanceof short[]));
 
-		Darjeeling.assertTrue(testBase + 27, !(ints instanceof int[]));
-		Darjeeling.assertTrue(testBase + 28, !(ints instanceof byte[]));
-		Darjeeling.assertTrue(testBase + 29, !(ints instanceof boolean[]));
-		Darjeeling.assertTrue(testBase + 30, ints instanceof short[]);
+		Ostfriesentee.assertTrue(testBase + 27, !(ints instanceof int[]));
+		Ostfriesentee.assertTrue(testBase + 28, !(ints instanceof byte[]));
+		Ostfriesentee.assertTrue(testBase + 29, !(ints instanceof boolean[]));
+		Ostfriesentee.assertTrue(testBase + 30, ints instanceof short[]);
 		
 	}
 	
@@ -175,26 +175,26 @@ public class ClassHierarchyTest
 		E e = new E();
         Inner inner = new Inner();
 
-		Darjeeling.assertTrue(testBase +  0, a instanceof AInterface);
-		Darjeeling.assertTrue(testBase +  1, b instanceof AInterface);
-		Darjeeling.assertTrue(testBase +  2, c instanceof AInterface);
-		Darjeeling.assertTrue(testBase +  3, d instanceof AInterface);
+		Ostfriesentee.assertTrue(testBase +  0, a instanceof AInterface);
+		Ostfriesentee.assertTrue(testBase +  1, b instanceof AInterface);
+		Ostfriesentee.assertTrue(testBase +  2, c instanceof AInterface);
+		Ostfriesentee.assertTrue(testBase +  3, d instanceof AInterface);
 
-		Darjeeling.assertTrue(testBase +  4, !(a instanceof CInterface));
-		Darjeeling.assertTrue(testBase +  5, !(b instanceof CInterface));
-		Darjeeling.assertTrue(testBase +  6, c instanceof CInterface);
-		Darjeeling.assertTrue(testBase +  7, d instanceof CInterface);
+		Ostfriesentee.assertTrue(testBase +  4, !(a instanceof CInterface));
+		Ostfriesentee.assertTrue(testBase +  5, !(b instanceof CInterface));
+		Ostfriesentee.assertTrue(testBase +  6, c instanceof CInterface);
+		Ostfriesentee.assertTrue(testBase +  7, d instanceof CInterface);
 
-		Darjeeling.assertTrue(testBase +  8, e instanceof EInterface);
-		Darjeeling.assertTrue(testBase +  9, e instanceof CInterface);
-		Darjeeling.assertTrue(testBase + 10, e instanceof AInterface);
-		Darjeeling.assertTrue(testBase + 11, !(e instanceof FInterface));
+		Ostfriesentee.assertTrue(testBase +  8, e instanceof EInterface);
+		Ostfriesentee.assertTrue(testBase +  9, e instanceof CInterface);
+		Ostfriesentee.assertTrue(testBase + 10, e instanceof AInterface);
+		Ostfriesentee.assertTrue(testBase + 11, !(e instanceof FInterface));
 
-        Darjeeling.assertTrue(testBase + 12, !(a instanceof EInterface));
-        Darjeeling.assertTrue(testBase + 13, !(d instanceof EInterface));
+        Ostfriesentee.assertTrue(testBase + 12, !(a instanceof EInterface));
+        Ostfriesentee.assertTrue(testBase + 13, !(d instanceof EInterface));
 
         // test if INSTANCEOF also works for interfaces across packages 
-        Darjeeling.assertTrue(testBase + 14, inner instanceof Super);
+        Ostfriesentee.assertTrue(testBase + 14, inner instanceof Super);
         // Darjeeling.assertTrue(testBase + 15, inner instanceof Collection);
 	}
 
@@ -205,15 +205,15 @@ public class ClassHierarchyTest
 		Object cc = new C[10];
 		Object dd = new D[10];
 
-		Darjeeling.assertTrue(testBase +  0, aa instanceof AInterface[]);
-		Darjeeling.assertTrue(testBase +  1, bb instanceof AInterface[]);
-		Darjeeling.assertTrue(testBase +  2, cc instanceof AInterface[]);
-		Darjeeling.assertTrue(testBase +  3, dd instanceof AInterface[]);
+		Ostfriesentee.assertTrue(testBase +  0, aa instanceof AInterface[]);
+		Ostfriesentee.assertTrue(testBase +  1, bb instanceof AInterface[]);
+		Ostfriesentee.assertTrue(testBase +  2, cc instanceof AInterface[]);
+		Ostfriesentee.assertTrue(testBase +  3, dd instanceof AInterface[]);
 
-		Darjeeling.assertTrue(testBase +  4, !(aa instanceof CInterface[]));
-		Darjeeling.assertTrue(testBase +  5, !(bb instanceof CInterface[]));
-		Darjeeling.assertTrue(testBase +  6, cc instanceof CInterface[]);
-		Darjeeling.assertTrue(testBase +  7, dd instanceof CInterface[]);
+		Ostfriesentee.assertTrue(testBase +  4, !(aa instanceof CInterface[]));
+		Ostfriesentee.assertTrue(testBase +  5, !(bb instanceof CInterface[]));
+		Ostfriesentee.assertTrue(testBase +  6, cc instanceof CInterface[]);
+		Ostfriesentee.assertTrue(testBase +  7, dd instanceof CInterface[]);
 
 		/*
 		 * TODO these tests fail on Darjeeling, but pass on hotspot - a ticket has been created on TRAC
@@ -232,26 +232,26 @@ public class ClassHierarchyTest
 
 		Object o = b;
 		a = (A)o;
-		Darjeeling.assertTrue(testBase +  0, a instanceof A);
-		Darjeeling.assertTrue(testBase +  1, a instanceof B);
+		Ostfriesentee.assertTrue(testBase +  0, a instanceof A);
+		Ostfriesentee.assertTrue(testBase +  1, a instanceof B);
 
 		o = c;
 		a = (B)o;
-		Darjeeling.assertTrue(testBase +  2, a instanceof A);
-		Darjeeling.assertTrue(testBase +  3, a instanceof B);
-		Darjeeling.assertTrue(testBase +  4, a instanceof C);
+		Ostfriesentee.assertTrue(testBase +  2, a instanceof A);
+		Ostfriesentee.assertTrue(testBase +  3, a instanceof B);
+		Ostfriesentee.assertTrue(testBase +  4, a instanceof C);
 		
 		C[] cc = new C[10];
 		D[] dd = new D[10];
 		Object oo = cc;
 		A[] aa = (A[])cc;
-		Darjeeling.assertTrue(testBase +  5, aa instanceof A[]);
-		Darjeeling.assertTrue(testBase +  6, aa instanceof B[]);
-		Darjeeling.assertTrue(testBase +  7, aa instanceof C[]);
+		Ostfriesentee.assertTrue(testBase +  5, aa instanceof A[]);
+		Ostfriesentee.assertTrue(testBase +  6, aa instanceof B[]);
+		Ostfriesentee.assertTrue(testBase +  7, aa instanceof C[]);
 		
 		o = d;
 		AInterface ai = (AInterface)o;
-		Darjeeling.assertTrue(testBase +  8, ai instanceof AInterface);
+		Ostfriesentee.assertTrue(testBase +  8, ai instanceof AInterface);
 
 		/*
 		stato = new D();

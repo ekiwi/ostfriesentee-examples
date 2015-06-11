@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 import javax.darjeeling.vm.Infusion;
 import javax.darjeeling.vm.InfusionUnloadDependencyException;
 
@@ -47,24 +47,24 @@ public class InfusionTest
 		
 		Infusion base = Infusion.getInfusionByName("base");
 		
-		Darjeeling.assertTrue(testBase + 0, base != null);
-		Darjeeling.assertTrue(testBase + 1, (base!=null) && (base.getImportedInfusionCount()==0));
+		Ostfriesentee.assertTrue(testBase + 0, base != null);
+		Ostfriesentee.assertTrue(testBase + 1, (base!=null) && (base.getImportedInfusionCount()==0));
 		
 		try {
 			base.unload();
-			Darjeeling.assertTrue(testBase + 2, false);
+			Ostfriesentee.assertTrue(testBase + 2, false);
 		} catch (InfusionUnloadDependencyException ex)
 		{
-			Darjeeling.assertTrue(testBase + 2, true);
+			Ostfriesentee.assertTrue(testBase + 2, true);
 		}
 		
 		Infusion testSuite = Infusion.getInfusionByName("testsuite");
 		try {
 			testSuite.unload();
-			Darjeeling.assertTrue(testBase + 3, false);
+			Ostfriesentee.assertTrue(testBase + 3, false);
 		} catch (InfusionUnloadDependencyException ex)
 		{
-			Darjeeling.assertTrue(testBase + 3, false);
+			Ostfriesentee.assertTrue(testBase + 3, false);
 		}
 		
 	}

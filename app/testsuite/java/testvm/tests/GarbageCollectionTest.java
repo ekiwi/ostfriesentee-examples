@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 import testvm.classes.A;
 import testvm.classes.TreeNode;
@@ -43,11 +43,11 @@ public class GarbageCollectionTest //implements Runnable
 
 		System.gc();
         
-		Darjeeling.assertTrue(testBase +  0, true);
-		Darjeeling.assertTrue(testBase +  1, localA.getX()==12);
-		Darjeeling.assertTrue(testBase +  2, localA.getY()==8);
-		Darjeeling.assertTrue(testBase +  3, staticA.getX()==-3);
-		Darjeeling.assertTrue(testBase +  4, staticA.getY()==2);
+		Ostfriesentee.assertTrue(testBase +  0, true);
+		Ostfriesentee.assertTrue(testBase +  1, localA.getX()==12);
+		Ostfriesentee.assertTrue(testBase +  2, localA.getY()==8);
+		Ostfriesentee.assertTrue(testBase +  3, staticA.getX()==-3);
+		Ostfriesentee.assertTrue(testBase +  4, staticA.getY()==2);
 		
 	}
 	
@@ -91,7 +91,7 @@ public class GarbageCollectionTest //implements Runnable
 		for (int i=0; i<numbers.length-1; i++)
 			isAscending &= numbers[i]<=numbers[i+1];
 		
-		Darjeeling.assertTrue(testBase + 0, isAscending);
+		Ostfriesentee.assertTrue(testBase + 0, isAscending);
 		
 	}
 	
@@ -104,7 +104,7 @@ public class GarbageCollectionTest //implements Runnable
 		{
 			buf[i%bufSize] = new byte[i%32];
 		}
-		Darjeeling.assertTrue(testBase, true);
+		Ostfriesentee.assertTrue(testBase, true);
 	}
 
 	public static void test(int testBase)

@@ -21,7 +21,7 @@
  
 package testvm.tests;
 
-import javax.darjeeling.Darjeeling;
+import javax.ostfriesentee.Ostfriesentee;
 
 public class CompareTest
 {
@@ -30,22 +30,22 @@ public class CompareTest
 	{
 		int a = 1, b = 2, c = 1;
 		// test equal
-		if (a==c) Darjeeling.assertTrue(testBase + 0, true); else 
-			Darjeeling.assertTrue(testBase + 0, false);
-		if (a==b) Darjeeling.assertTrue(testBase + 1, false); else 
-			Darjeeling.assertTrue(testBase + 1, true);
+		if (a==c) Ostfriesentee.assertTrue(testBase + 0, true); else 
+			Ostfriesentee.assertTrue(testBase + 0, false);
+		if (a==b) Ostfriesentee.assertTrue(testBase + 1, false); else 
+			Ostfriesentee.assertTrue(testBase + 1, true);
 
 		// test not equal
-		if (a!=b) Darjeeling.assertTrue(testBase + 2, true); else 
-			Darjeeling.assertTrue(testBase + 2, false);
-		if (a!=c) Darjeeling.assertTrue(testBase + 3, false); else 
-			Darjeeling.assertTrue(testBase + 3, true);
+		if (a!=b) Ostfriesentee.assertTrue(testBase + 2, true); else 
+			Ostfriesentee.assertTrue(testBase + 2, false);
+		if (a!=c) Ostfriesentee.assertTrue(testBase + 3, false); else 
+			Ostfriesentee.assertTrue(testBase + 3, true);
 		
 		// null test
 		Object o = null;
-		Darjeeling.assertTrue(testBase + 4, o==null);
+		Ostfriesentee.assertTrue(testBase + 4, o==null);
 		o = new Object();
-		Darjeeling.assertTrue(testBase + 5, o!=null);
+		Ostfriesentee.assertTrue(testBase + 5, o!=null);
 
 	}	
 
