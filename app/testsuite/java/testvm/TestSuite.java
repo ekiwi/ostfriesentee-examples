@@ -48,26 +48,45 @@ public class TestSuite
 	public static void test()
 	{
 		try {
+			Ostfriesentee.print("Running ArithmeticTest...\n");
 			ArithmeticTest.test(000);
+			Ostfriesentee.print("Running ArrayTest...\n");
 			ArrayTest.test(100);
+			Ostfriesentee.print("Running CompareTest...\n");
 			CompareTest.test(200);
+			Ostfriesentee.print("Running ClassHierarchyTest...\n");
 			ClassHierarchyTest.test(300);
+			Ostfriesentee.print("Running StaticFieldsTest...\n");
 			StaticFieldsTest.test(400);
+			Ostfriesentee.print("Running FieldTest...\n");
 			FieldTest.test(500);
+			Ostfriesentee.print("Running InitialiserTest...\n");
 			InitialiserTest.test(600);
+			Ostfriesentee.print("Running InvokeVirtualTest...\n");
 			InvokeVirtualTest.test(700);
+			Ostfriesentee.print("Running GarbageCollectionTest...\n");
 			GarbageCollectionTest.test(800);
+			Ostfriesentee.print("Running SwitchTest...\n");
 			SwitchTest.test(900);
+			Ostfriesentee.print("Running ThreadTest...\n");
 			ThreadTest.test(1000);
+			Ostfriesentee.print("Running InheritanceTest...\n");
 			InheritanceTest.test(1100);
+			Ostfriesentee.print("Running ExceptionsTest...\n");
 			ExceptionsTest.test(1200);
+			Ostfriesentee.print("Running MD5Test...\n");
 	 		MD5Test.test(1300);
+			Ostfriesentee.print("Running MethodOverloadingTest...\n");
 			MethodOverloadingTest.test(1400);
+			Ostfriesentee.print("Running RuntimeExceptionsTest...\n");
 			RuntimeExceptionsTest.test(1500);
+			Ostfriesentee.print("Running BitManipulationTest...\n");
 			BitManipulationTest.test(1700);
+			Ostfriesentee.print("Running AlignmentTest...\n");
 			AlignmentTest.test(1800);
 //			TryCatchTest.test(1900);
 //			InfusionTest.test(2000);
+			Ostfriesentee.print("Done...\n");
 		} catch (Throwable t)
 		{
 			Ostfriesentee.print("Uncaught throwable: " + t.getMessage());
