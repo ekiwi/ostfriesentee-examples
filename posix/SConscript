@@ -21,7 +21,8 @@ import os
 
 Import('env')
 
-app_name = 'helloworld'
+#app_name = 'helloworld'
+app_name = 'benchmark'
 
 
 # dependencies
