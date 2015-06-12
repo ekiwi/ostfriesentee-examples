@@ -16,7 +16,8 @@ env['CFLAGS'].append("-g")
 env['CFLAGS'].append("-DALIGN_32")
 
 #app_name = 'helloworld'
-app_name = 'benchmark'
+#app_name = 'benchmark'
+app_name = 'testsuite'
 
 # dependencies
 vm = SConscript(['../../ostfriesentee/vm/SConscript'], exports = 'env')
