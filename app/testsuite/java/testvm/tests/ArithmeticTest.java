@@ -309,9 +309,13 @@ public class ArithmeticTest
 
 	public static void test(int testBase)
 	{
+		Ostfriesentee.print("\ttestByte...\n");
 		testByte(testBase);
+		Ostfriesentee.print("\ttestShort...\n");
 		testShort(testBase+25);
+		Ostfriesentee.print("\ttestInt...\n");
 		testInt(testBase+50);
+		Ostfriesentee.print("\ttestLong...\n");
 		testLong(testBase+80);
 	}
 

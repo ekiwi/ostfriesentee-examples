@@ -91,7 +91,8 @@ public class TestSuite
 		{
 			Ostfriesentee.print("Uncaught throwable: " + t.getMessage());
 		}
-		Ostfriesentee.print("All testsuites have passed succsessfuly.\n");
+		Ostfriesentee.printTestResults();
+		//Ostfriesentee.print("All testsuites have passed succsessfuly.\n");
 	}
 
 	public static void main(String[] args)
