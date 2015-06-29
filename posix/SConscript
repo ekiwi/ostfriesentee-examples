@@ -22,17 +22,21 @@ import os
 Import('env')
 
 #app_name = 'helloworld'
-#app_name = 'benchmark'
-app_name = 'testsuite'
+app_name = 'benchmark'
+#app_name = 'testsuite'
+app_path = '../app'
+#app_name = 'events'
+#app_path = '../../java-playground'
 
 # dependencies
 vm = SConscript(['../ostfriesentee/vm/SConscript'], exports = 'env')
-app = SConscript(['../app/{}/SConscript'.format(app_name)], exports = 'env')
+app = SConscript(['{}/{}/SConscript'.format(app_path, app_name)], exports = 'env')
 
 app_di = os.path.join(env['OFT_BUILDPATH'], 'app', app_name, app_name + '.di')
 base_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base', 'base.di')
 base_lib_inc = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base')
 base_lib_a   = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base', 'libbase.a')
+util_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'util', 'util.di')
 oft_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee', 'ostfriesentee.di')
 oft_lib_inc = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee')
 oft_lib_a   = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee', 'libostfriesentee.a')
@@ -46,7 +50,7 @@ c_env.Append(CPPPATH = [os.path.abspath('../ostfriesentee/vm/c')])
 
 # put all di files into single object file
 # TODO: HACK: all libs/apps hardcoded
-infusions = [base_lib_di, oft_lib_di, app_di]
+infusions = [base_lib_di, util_lib_di, oft_lib_di, app_di]
 archive = env.Command("build/posix/generated/di_archive.ar", infusions, "ar rcf $TARGET $SOURCES")
 di_c_array = env.CArray("build/posix/generated/di_archive.c", archive)
 
