@@ -66,14 +66,3 @@ void runOstfriesentee() {
 	dj_mem_gc();
 	dj_vm_destroy(vm);
 }
-
-// Ostfriesentee Timer
-void dj_timer_init()
-{
-
-}
-
-uint32_t dj_timer_getTimeMillis()
-{
-	return 0;
-}

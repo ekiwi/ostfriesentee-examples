@@ -22,6 +22,9 @@ xpcc::log::Logger xpcc::log::error(loggerDevice);
 extern "C"
 void runOstfriesentee();
 
+extern "C"
+void systick_interrupt();
+
 // Dummy Clock
 struct DummyClock {
 	static constexpr int Usart1 = 8 * 1000 * 1000;
@@ -33,6 +36,10 @@ MAIN_FUNCTION
 	GpioOutputA9::connect(Usart1::Tx);
 	GpioInputA10::connect(Usart1::Rx, Gpio::InputType::PullUp);
 	Usart1::initialize<DummyClock, 115200>();
+
+	// enable systick timer
+	xpcc::cortex::SysTickTimer::enable();
+	xpcc::cortex::SysTickTimer::attachInterrupt(systick_interrupt);
 
 	XPCC_LOG_INFO << "Ostfriesentee on STM32F0 powered by xpcc." << xpcc::endl;
 
@@ -98,4 +105,19 @@ void dj_panic(int32_t panictype)
 		XPCC_LOG_ERROR << "Darjeeling panic: unknown panic type" << xpcc::endl;
 		break;
 	}
+}
+
+static uint32_t milliseconds = 0;
+
+// Ostfriesentee Timer
+extern "C"
+void systick_interrupt()
+{
+	++milliseconds;
+}
+
+extern "C"
+uint32_t dj_timer_getTimeMillis()
+{
+	return milliseconds;
 }
