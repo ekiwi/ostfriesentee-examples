@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdarg.h>
+#include <iostream>
 
 extern "C"
 {
@@ -40,7 +41,8 @@ extern "C"
 #include "pointerwidth.h"
 }
 
-#include <hpp/vm.hpp>
+#include <hpp/ostfriesentee.hpp>
+using namespace ostfriesentee;
 
 char * ref_t_base_address;
 
@@ -49,7 +51,7 @@ extern size_t di_archive_size;
 
 uint8_t mem[MEMSIZE];
 
-int main(int argc,char* argv[])
+int main(int /*argc*/,char* /*argv*/[])
 {
 
 	// initialise memory manager
@@ -57,7 +59,7 @@ int main(int argc,char* argv[])
 	ref_t_base_address = (char*)mem - 42;
 
 	// Create a new VM
-	ostfriesentee::Vm vm;
+	Vm vm;
 	vm.makeActiveVm();
 
 	dj_named_native_handler handlers[] = {
@@ -78,6 +80,15 @@ int main(int argc,char* argv[])
 
 	// start the main execution loop
 	vm.run();
+
+	std::cout << std::endl << "---------------------------" << std::endl;
+
+	// try to find events.multi.Node class
+	Infusion inf = vm.firstInfusion();
+	while(inf.isValid()) {
+		std::cout << "Infusion: " << inf.getName() << std::endl;
+		inf = inf.next();
+	}
 
 	return 0;
 }
