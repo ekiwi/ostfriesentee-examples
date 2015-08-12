@@ -25,6 +25,7 @@
 #include <stdbool.h>
 #include <stdarg.h>
 #include <iostream>
+#include <cstring>
 
 extern "C"
 {
@@ -50,6 +51,13 @@ extern unsigned char di_archive_data[];
 extern size_t di_archive_size;
 
 uint8_t mem[MEMSIZE];
+
+
+std::ostream &operator<<(std::ostream &os, dj_local_id const &id) {
+	os << "(" << static_cast<uint32_t>(id.infusion_id)
+	   << ", " << static_cast<uint32_t>(id.entity_id) << ")";
+	return os;
+}
 
 int main(int /*argc*/,char* /*argv*/[])
 {
@@ -86,11 +94,30 @@ int main(int /*argc*/,char* /*argv*/[])
 	// try to find events.multi.Node class
 	Infusion inf = vm.firstInfusion();
 	while(inf.isValid()) {
-		std::cout << "Infusion: " << inf.getName() << std::endl;
-		List classes = inf.getClassList();
+		std::cout << std::endl << "Infusion: " << inf.getName() << std::endl;
+
+		ClassList classes = inf.getClassList();
 		std::cout << "Number of classes: " << static_cast<int>(classes.getSize()) << std::endl;
+		for(uint8_t ii = 0; ii < classes.getSize(); ++ii) {
+			ClassDefinition def = classes.getElement(ii);
+			int numberOfInterfaces = def.getNumberOfInterfaces();
+			std::cout << "Superclass: " << def.getSuperClass() << std::endl;
+			std::cout << "Name: " << def.getNameId() << std::endl;
+			std::cout << "Interfaces: " << numberOfInterfaces << std::endl;
+		}
+
 		List methods = inf.getMethodImplementationList();
 		std::cout << "Number of methods: " << static_cast<int>(methods.getSize()) << std::endl;
+
+		StringTable strings = inf.getStringTable();
+		std::cout << "Number of strings: " << static_cast<int>(strings.getSize()) << std::endl;
+		for(uint16_t ii = 0; ii < strings.getSize(); ++ii) {
+			uint16_t length = strings.getStringLength(ii);
+			char buffer[length+1];
+			std::memcpy(buffer, strings.getStringData(ii), length+1);
+			buffer[length] = 0;
+			std::cout << buffer << std::endl;
+		}
 
 		inf = inf.next();
 	}
