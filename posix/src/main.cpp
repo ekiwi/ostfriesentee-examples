@@ -59,6 +59,11 @@ std::ostream &operator<<(std::ostream &os, dj_local_id const &id) {
 	return os;
 }
 
+std::ostream &operator<<(std::ostream &os, String const &str) {
+	os.write(str.data, str.length);
+	return os;
+}
+
 int main(int /*argc*/,char* /*argv*/[])
 {
 
@@ -112,11 +117,7 @@ int main(int /*argc*/,char* /*argv*/[])
 		StringTable strings = inf.getStringTable();
 		std::cout << "Number of strings: " << static_cast<int>(strings.getSize()) << std::endl;
 		for(uint16_t ii = 0; ii < strings.getSize(); ++ii) {
-			uint16_t length = strings.getStringLength(ii);
-			char buffer[length+1];
-			std::memcpy(buffer, strings.getStringData(ii), length+1);
-			buffer[length] = 0;
-			std::cout << buffer << std::endl;
+			std::cout << strings.getString(ii) << std::endl;
 		}
 
 		inf = inf.next();
