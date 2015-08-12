@@ -40,29 +40,25 @@ extern "C"
 #include "pointerwidth.h"
 }
 
+#include <hpp/vm.hpp>
 
 char * ref_t_base_address;
 
 extern unsigned char di_archive_data[];
 extern size_t di_archive_size;
 
+uint8_t mem[MEMSIZE];
+
 int main(int argc,char* argv[])
 {
 
-	dj_vm * vm;
-	dj_object * obj;
-
 	// initialise memory manager
-	void *mem = malloc(MEMSIZE);
 	dj_mem_init(mem, MEMSIZE);
-
 	ref_t_base_address = (char*)mem - 42;
 
 	// Create a new VM
-	vm = dj_vm_create();
-
-	// tell the execution engine to use the newly created VM instance
-	dj_exec_setVM(vm);
+	ostfriesentee::Vm vm;
+	vm.makeActiveVm();
 
 	dj_named_native_handler handlers[] = {
 			{ "base", &base_native_handler },
@@ -74,24 +70,14 @@ int main(int argc,char* argv[])
 	archive.start = (dj_di_pointer)di_archive_data;
 	archive.end = (dj_di_pointer)(di_archive_data + di_archive_size);
 
-	dj_vm_loadInfusionArchive(vm, &archive, handlers, length);
-	
+	vm.loadInfusionArchive(archive, handlers, length);
+
 	// pre-allocate an OutOfMemoryError object
-	obj = dj_vm_createSysLibObject(vm, BASE_CDEF_java_lang_OutOfMemoryError);
+	dj_object* obj = vm.createSysLibObject(BASE_CDEF_java_lang_OutOfMemoryError);
 	dj_mem_setPanicExceptionObject(obj);
 
 	// start the main execution loop
-	while (dj_vm_countLiveThreads(vm)>0)
-	{
-		dj_vm_schedule(vm);
-		if (vm->currentThread!=NULL)
-			if (vm->currentThread->status==THREADSTATUS_RUNNING)
-				dj_exec_run(RUNSIZE);
-	}
-
-	dj_vm_schedule(vm);
-	dj_mem_gc();
-	dj_vm_destroy(vm);
+	vm.run();
 
 	return 0;
 }
