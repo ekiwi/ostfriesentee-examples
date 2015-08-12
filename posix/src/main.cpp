@@ -87,6 +87,11 @@ int main(int /*argc*/,char* /*argv*/[])
 	Infusion inf = vm.firstInfusion();
 	while(inf.isValid()) {
 		std::cout << "Infusion: " << inf.getName() << std::endl;
+		List classes = inf.getClassList();
+		std::cout << "Number of classes: " << static_cast<int>(classes.getSize()) << std::endl;
+		List methods = inf.getMethodImplementationList();
+		std::cout << "Number of methods: " << static_cast<int>(methods.getSize()) << std::endl;
+
 		inf = inf.next();
 	}
 
