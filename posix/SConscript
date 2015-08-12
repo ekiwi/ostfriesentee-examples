@@ -22,8 +22,8 @@ import os
 Import('env')
 
 #app_name = 'helloworld'
-app_name = 'benchmark'
-#app_name = 'testsuite'
+#app_name = 'benchmark'
+app_name = 'testsuite'
 app_path = '../app'
 #app_name = 'events'
 #app_path = '../../java-playground'
@@ -50,13 +50,13 @@ c_env.Append(CPPPATH = [os.path.abspath('../ostfriesentee/vm/c')])
 
 # put all di files into single object file
 # TODO: HACK: all libs/apps hardcoded
-infusions = [base_lib_di, util_lib_di, oft_lib_di, app_di]
+infusions = [base_lib_di, oft_lib_di, app_di]
 archive = env.Command("build/posix/generated/di_archive.ar", infusions, "ar rcf $TARGET $SOURCES")
 di_c_array = env.CArray("build/posix/generated/di_archive.c", archive)
 
 c_env.AppendUnique(LIBS = vm + [c_env.File(base_lib_a), c_env.File(oft_lib_a)])
 
-posix = c_env.Program('build/posix/main', env.Glob('build/posix/*.c') + [di_c_array])
+posix = c_env.Program('build/posix/main', env.Glob('build/posix/*.c') + env.Glob('build/posix/*.cpp') + [di_c_array])
 
 
 Return('posix')

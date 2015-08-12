@@ -25,6 +25,9 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
+extern "C"
+{
+
 #include "jlib_base.h"
 #include "jlib_ostfriesentee.h"
 
@@ -35,6 +38,9 @@
 #include "config.h"
 
 #include "pointerwidth.h"
+}
+
+
 char * ref_t_base_address;
 
 extern unsigned char di_archive_data[];
@@ -90,6 +96,7 @@ int main(int argc,char* argv[])
 	return 0;
 }
 
+extern "C"
 int debug_printf(const char * format, ...) {
 	va_list ap;
 	va_start(ap, format);
