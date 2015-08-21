@@ -142,7 +142,9 @@ int main(int /*argc*/,char* /*argv*/[])
 	}
 
 	// try to create an instance of SimpleObject class
-	jlib_object::SimpleObject simple(vm, inf, 200, 300);
+	jlib_object::SimpleObject simple(inf, 200, 300);
+
+	std::cout << "simple.getA() = " << simple.getA() << std::endl;
 
 	// try to access values
 	auto sim = simple.getUnderlying();
@@ -152,9 +154,6 @@ int main(int /*argc*/,char* /*argv*/[])
 	//_OBJECT_STRUCT_LessSimpleObject* lessSimpleObject = (_OBJECT_STRUCT_LessSimpleObject*)simple;
 	//std::cout << "lessSimpleObject.b = " << lessSimpleObject->b << std::endl;
 	//std::cout << "lessSimpleObject.c = " << lessSimpleObject->c << std::endl;
-
-
-
 
 	return 0;
 }

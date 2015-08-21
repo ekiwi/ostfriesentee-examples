@@ -12,14 +12,16 @@ class SimpleObject : Object {
 	static constexpr uint8_t ClassId = 0;
 
 	_OBJECT_STRUCT_SimpleObject* obj;
+	dj_infusion* infusion;
 
 public:
 	SimpleObject(const SimpleObject&) = delete;
 	SimpleObject& operator=(const SimpleObject&) = delete;
 
 public:
-	SimpleObject(Vm& vm, Infusion& infusion, int32_t a, int32_t b) {
-		this->obj = (_OBJECT_STRUCT_SimpleObject*)create(vm, infusion.getUnderlying(), ClassId);
+	SimpleObject(Infusion& infusion, int32_t a, int32_t b) {
+		this->infusion = infusion.getUnderlying();
+		this->obj = (_OBJECT_STRUCT_SimpleObject*)create(this->infusion, ClassId);
 		dj_mem_addSafePointer((void**)&this->obj);
 
 		// parameters
@@ -30,8 +32,8 @@ public:
 		intParams[3] = (b >> 16) & 0xffff;
 		ref_t refParams[1] = { VOIDP_TO_REF(this->obj) };
 
-		dj_global_id ctor{infusion.getUnderlying(), OBJECT_MDEF_void__init__int_int};
-		dj_exec_callMethodFromNative(ctor, vm.getFirstThread(), refParams, intParams);
+		dj_global_id ctor{this->infusion, OBJECT_MDEF_void__init__int_int};
+		dj_exec_callMethodFromNative(ctor, getThread(), refParams, intParams);
 		dj_exec_run(100000);
 	}
 
@@ -41,6 +43,14 @@ public:
 
 	_OBJECT_STRUCT_SimpleObject* getUnderlying() {
 		return this->obj;
+	}
+
+	int32_t getA() {
+		ref_t refParams[1] = { VOIDP_TO_REF(this->obj) };
+		dj_global_id method{this->infusion, OBJECT_MDEF_int_getA};
+		dj_exec_callMethodFromNative(method, getThread(), refParams, nullptr);
+		dj_exec_run(100000);
+		return 0;
 	}
 
 };
