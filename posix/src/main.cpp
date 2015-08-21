@@ -43,6 +43,8 @@ extern "C"
 #include "pointerwidth.h"
 }
 
+#include "SimpleObject.hpp"
+
 #include <hpp/ostfriesentee.hpp>
 using namespace ostfriesentee;
 
@@ -140,41 +142,16 @@ int main(int /*argc*/,char* /*argv*/[])
 	}
 
 	// try to create an instance of SimpleObject class
-
-	// TODO: look at dj_vm_runClassInitialisers
-
-	// create object in memory
-	dj_global_id simple_id{inf.getUnderlying(), OBJECT_CDEF_SimpleObject};
-	uint8_t runtime_id = dj_global_id_getRuntimeClassId(simple_id);
-	dj_di_pointer classDef = vm.getRuntimeClassDefinition(runtime_id);
-	dj_object* simple = dj_object_create(runtime_id,
-			dj_di_classDefinition_getNrRefs(classDef),
-			dj_di_classDefinition_getOffsetOfFirstReference(classDef)
-			);
-	dj_mem_addSafePointer((void**)&simple);
-
-	// create thread and frame from which to call constructor
-	dj_thread* thread = dj_thread_create();
-	vm.addThread(thread);
-
-	int16_t intParams[4];
-	intParams[0] = (200 >>  0) & 0xffff;
-	intParams[1] = (200 >> 16) & 0xffff;
-	intParams[2] = (300 >>  0) & 0xffff;
-	intParams[3] = (300 >> 16) & 0xffff;
-	ref_t refParams[1] = { VOIDP_TO_REF(simple) };
-
-	dj_global_id simple_init{inf.getUnderlying(), OBJECT_MDEF_void__init__int_int};
-	dj_exec_callMethodFromNative(simple_init, thread, refParams, intParams);
-
-	dj_exec_run(1000);
-
+	jlib_object::SimpleObject simple(vm, inf, 200, 300);
 
 	// try to access values
+	auto sim = simple.getUnderlying();
+	std::cout << "sim.a = " << sim->a << std::endl;
+	std::cout << "sim.b = " << sim->b << std::endl;
 
-	_OBJECT_STRUCT_SimpleObject* simpleObject = (_OBJECT_STRUCT_SimpleObject*)simple;
-	std::cout << "simpleObject.a = " << simpleObject->a << std::endl;
-	std::cout << "simpleObject.b = " << simpleObject->b << std::endl;
+	//_OBJECT_STRUCT_LessSimpleObject* lessSimpleObject = (_OBJECT_STRUCT_LessSimpleObject*)simple;
+	//std::cout << "lessSimpleObject.b = " << lessSimpleObject->b << std::endl;
+	//std::cout << "lessSimpleObject.c = " << lessSimpleObject->c << std::endl;
 
 
 
