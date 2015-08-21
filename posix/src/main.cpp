@@ -32,6 +32,7 @@ extern "C"
 
 #include "jlib_base.h"
 #include "jlib_ostfriesentee.h"
+#include "jlib_object.h"
 
 #include "types.h"
 #include "vm.h"
@@ -94,9 +95,10 @@ int main(int /*argc*/,char* /*argv*/[])
 	// start the main execution loop
 	vm.run();
 
+/*
 	std::cout << std::endl << "---------------------------" << std::endl;
 
-	// try to find events.multi.Node class
+	// list some information that can be gathered from the infusions
 	Infusion inf = vm.firstInfusion();
 	while(inf.isValid()) {
 		std::cout << std::endl << "Infusion: " << inf.getName() << std::endl;
@@ -122,6 +124,78 @@ int main(int /*argc*/,char* /*argv*/[])
 
 		inf = inf.next();
 	}
+
+
+	std::cout << std::endl << "---------------------------" << std::endl;
+	std::cout << "searching for infusion `object`..... ";
+*/
+	// fin events infusion
+	Infusion inf = vm.firstInfusion();
+	while(inf.isValid()) {
+		if(strcmp(inf.getName(), "object") == 0) {
+			std::cout << "found!" << std::endl;
+			break;
+		}
+		inf = inf.next();
+	}
+
+	// try to create an instance of SimpleObject class
+
+	// TODO: look at dj_vm_runClassInitialisers
+
+	// create object in memory
+	dj_global_id simple_id{inf.getUnderlying(), OBJECT_CDEF_SimpleObject};
+	uint8_t runtime_id = dj_global_id_getRuntimeClassId(simple_id);
+	dj_di_pointer classDef = vm.getRuntimeClassDefinition(runtime_id);
+	dj_object* simple = dj_object_create(runtime_id,
+			dj_di_classDefinition_getNrRefs(classDef),
+			dj_di_classDefinition_getOffsetOfFirstReference(classDef)
+			);
+	dj_mem_addSafePointer((void**)&simple);
+
+	// create thread and frame from which to call constructor
+	dj_thread* currentThread = dj_exec_getCurrentThread();
+
+	dj_thread* thread;
+	{
+		size_t size = sizeof(dj_frame) + sizeof(ref_t) + sizeof(int32_t) * 2;
+		dj_frame *frame = (dj_frame*)dj_mem_alloc(size, CHUNKID_FRAME);
+
+		frame->method = { inf.getUnderlying(), 200 };	// TODO: let's see where this blows up
+		frame->parent = NULL;
+		frame->pc = 0;
+		frame->nr_int_stack = 0;
+		frame->nr_ref_stack = 0;
+
+		int16_t* intStack = dj_frame_getIntegerStack(frame);
+		intStack[0] = (200 >>  0) & 0xffff;
+		intStack[1] = (200 >> 16) & 0xffff;
+		intStack[2] = (300 >>  0) & 0xffff;
+		intStack[3] = (300 >> 16) & 0xffff;
+		ref_t*   refStack = dj_frame_getReferenceStack(frame);
+		refStack[0] = VOIDP_TO_REF(simple);
+
+		dj_mem_addSafePointer((void**)&frame);
+		thread = dj_thread_create();
+		dj_mem_removeSafePointer((void**)&frame);
+
+		thread->frameStack = frame;
+		thread->status = THREADSTATUS_RUNNING;
+	}
+
+	dj_global_id simple_init{inf.getUnderlying(), OBJECT_MDEF_void__init__int_int};
+
+	vm.addThread(thread);
+	vm.activateThread(thread);
+	dj_exec_callMethod(simple_init, 1);
+
+	dj_exec_run(1000);
+	//vm.run();
+	//dj_exec_callMethod(simple_init, 1);	// virtual call => TODO: why?
+	//dj_exec_run(1000);
+
+
+
 
 	return 0;
 }
