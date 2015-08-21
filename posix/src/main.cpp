@@ -168,8 +168,13 @@ int main(int /*argc*/,char* /*argv*/[])
 	dj_exec_callMethodFromNative(simple_init, thread, refParams, intParams);
 
 	dj_exec_run(1000);
-	//vm.run();
-	//dj_exec_run(1000);
+
+
+	// try to access values
+
+	_OBJECT_STRUCT_SimpleObject* simpleObject = (_OBJECT_STRUCT_SimpleObject*)simple;
+	std::cout << "simpleObject.a = " << simpleObject->a << std::endl;
+	std::cout << "simpleObject.b = " << simpleObject->b << std::endl;
 
 
 
