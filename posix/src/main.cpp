@@ -154,44 +154,21 @@ int main(int /*argc*/,char* /*argv*/[])
 	dj_mem_addSafePointer((void**)&simple);
 
 	// create thread and frame from which to call constructor
-	dj_thread* currentThread = dj_exec_getCurrentThread();
+	dj_thread* thread = dj_thread_create();
+	vm.addThread(thread);
 
-	dj_thread* thread;
-	{
-		size_t size = sizeof(dj_frame) + sizeof(ref_t) + sizeof(int32_t) * 2;
-		dj_frame *frame = (dj_frame*)dj_mem_alloc(size, CHUNKID_FRAME);
-
-		frame->method = { inf.getUnderlying(), 200 };	// TODO: let's see where this blows up
-		frame->parent = NULL;
-		frame->pc = 0;
-		frame->nr_int_stack = 0;
-		frame->nr_ref_stack = 0;
-
-		int16_t* intStack = dj_frame_getIntegerStack(frame);
-		intStack[0] = (200 >>  0) & 0xffff;
-		intStack[1] = (200 >> 16) & 0xffff;
-		intStack[2] = (300 >>  0) & 0xffff;
-		intStack[3] = (300 >> 16) & 0xffff;
-		ref_t*   refStack = dj_frame_getReferenceStack(frame);
-		refStack[0] = VOIDP_TO_REF(simple);
-
-		dj_mem_addSafePointer((void**)&frame);
-		thread = dj_thread_create();
-		dj_mem_removeSafePointer((void**)&frame);
-
-		thread->frameStack = frame;
-		thread->status = THREADSTATUS_RUNNING;
-	}
+	int16_t intParams[4];
+	intParams[0] = (200 >>  0) & 0xffff;
+	intParams[1] = (200 >> 16) & 0xffff;
+	intParams[2] = (300 >>  0) & 0xffff;
+	intParams[3] = (300 >> 16) & 0xffff;
+	ref_t refParams[1] = { VOIDP_TO_REF(simple) };
 
 	dj_global_id simple_init{inf.getUnderlying(), OBJECT_MDEF_void__init__int_int};
-
-	vm.addThread(thread);
-	vm.activateThread(thread);
-	dj_exec_callMethod(simple_init, 1);
+	dj_exec_callMethodFromNative(simple_init, thread, refParams, intParams);
 
 	dj_exec_run(1000);
 	//vm.run();
-	//dj_exec_callMethod(simple_init, 1);	// virtual call => TODO: why?
 	//dj_exec_run(1000);
 
 
