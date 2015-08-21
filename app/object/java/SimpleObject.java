@@ -27,10 +27,11 @@ public class SimpleObject
 	private int b;
 
 	public SimpleObject(int a, int b) {
-		Ostfriesentee.print("SimpleObject Constructor: begin");
+		Ostfriesentee.print("\nSimpleObject Constructor: begin\n\n");
 		this.a = a;
 		this.b = b;
-		Ostfriesentee.print("SimpleObject Constructor: end");
+		// Ostfriesentee.print("this.b = " + b + ";\n");
+		Ostfriesentee.print("\nSimpleObject Constructor: end\n\n");
 	}
 
 	public int getA() { return this.a; }
