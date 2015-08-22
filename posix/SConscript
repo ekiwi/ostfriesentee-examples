@@ -51,7 +51,7 @@ c_env.Append(CPPPATH = [os.path.abspath('../ostfriesentee/vm/c')])
 
 # put all di files into single object file
 # TODO: HACK: all libs/apps hardcoded
-infusions = [base_lib_di, oft_lib_di, util_lib_di, app_di]
+infusions = [base_lib_di, oft_lib_di, app_di] # util_lib_di, 
 archive = env.Command("build/posix/generated/di_archive.ar", infusions, "ar rcf $TARGET $SOURCES")
 di_c_array = env.CArray("build/posix/generated/di_archive.c", archive)
 
