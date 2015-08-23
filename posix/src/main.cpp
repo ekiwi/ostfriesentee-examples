@@ -50,8 +50,10 @@ using namespace ostfriesentee;
 
 char * ref_t_base_address;
 
-extern unsigned char di_archive_data[];
-extern size_t di_archive_size;
+extern unsigned char di_lib_archive_data[];
+extern size_t di_lib_archive_size;
+extern unsigned char di_app_archive_data[];
+extern size_t di_app_archive_size;
 
 uint8_t mem[MEMSIZE];
 
@@ -78,6 +80,7 @@ int main(int /*argc*/,char* /*argv*/[])
 	Vm vm;
 	vm.makeActiveVm();
 
+	// load libraries
 	dj_named_native_handler handlers[] = {
 			{ "base", &base_native_handler },
 			{ "ostfriesentee", &ostfriesentee_native_handler }
@@ -85,10 +88,14 @@ int main(int /*argc*/,char* /*argv*/[])
 
 	int length = sizeof(handlers)/ sizeof(handlers[0]);
 	dj_archive archive;
-	archive.start = (dj_di_pointer)di_archive_data;
-	archive.end = (dj_di_pointer)(di_archive_data + di_archive_size);
-
+	archive.start = (dj_di_pointer)di_lib_archive_data;
+	archive.end = (dj_di_pointer)(di_lib_archive_data + di_lib_archive_size);
 	vm.loadInfusionArchive(archive, handlers, length);
+
+	// load app
+	archive.start = (dj_di_pointer)di_app_archive_data;
+	archive.end = (dj_di_pointer)(di_app_archive_data + di_app_archive_size);
+	vm.loadInfusionArchive(archive, nullptr, 0);
 
 	// pre-allocate an OutOfMemoryError object
 	dj_object* obj = vm.createSysLibObject(BASE_CDEF_java_lang_OutOfMemoryError);

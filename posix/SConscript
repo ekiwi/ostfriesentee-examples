@@ -27,37 +27,17 @@ Import('env')
 app_name = 'object'
 app_path = '../app'
 
-# dependencies
-vm = SConscript(['../ostfriesentee/vm/SConscript'], exports = 'env')
 app = SConscript(['{}/{}/SConscript'.format(app_path, app_name)], exports = 'env')
-
 app_di  = os.path.join(env['OFT_BUILDPATH'], 'app', app_name, app_name + '.di')
 app_inc = os.path.join(env['OFT_BUILDPATH'], 'app', app_name)
-base_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base', 'base.di')
-base_lib_inc = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base')
-base_lib_a   = os.path.join(env['OFT_BUILDPATH'], 'lib', 'base', 'libbase.a')
-util_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'util', 'util.di')
-oft_lib_di  = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee', 'ostfriesentee.di')
-oft_lib_inc = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee')
-oft_lib_a   = os.path.join(env['OFT_BUILDPATH'], 'lib', 'ostfriesentee', 'libostfriesentee.a')
+env.Append(CPPPATH = app_inc)
+archive = env.Command("build/posix/generated/di_app_archive.ar", [app_di], "ar rcf $TARGET $SOURCES")
+di_c_array = env.CArray("build/posix/generated/di_app_archive.c", archive)
 
-# build c
-c_env = env.Clone()
-c_env.VariantDir(variant_dir='build/posix', src_dir='src')
-c_env.Append(CPPPATH = base_lib_inc)
-c_env.Append(CPPPATH = oft_lib_inc)
-c_env.Append(CPPPATH = app_inc)
-c_env.Append(CPPPATH = [os.path.abspath('../ostfriesentee/vm/c')])
 
-# put all di files into single object file
-# TODO: HACK: all libs/apps hardcoded
-infusions = [base_lib_di, oft_lib_di, app_di] # util_lib_di, 
-archive = env.Command("build/posix/generated/di_archive.ar", infusions, "ar rcf $TARGET $SOURCES")
-di_c_array = env.CArray("build/posix/generated/di_archive.c", archive)
-
-c_env.AppendUnique(LIBS = vm + [c_env.File(base_lib_a), c_env.File(oft_lib_a)])
-
-posix = c_env.Program('build/posix/main', env.Glob('build/posix/*.c') + env.Glob('build/posix/*.cpp') + [di_c_array])
+runtime = env.OstfriesenteeRuntime(['base', 'ostfriesentee'])
+env.VariantDir(variant_dir='build/posix', src_dir='src')
+posix = env.Program('build/posix/main', env.Glob('build/posix/*.c') + env.Glob('build/posix/*.cpp') + [di_c_array] + runtime)
 
 
 Return('posix')
