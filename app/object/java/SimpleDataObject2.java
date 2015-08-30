@@ -1,5 +1,5 @@
 /*
- * HelloWorld.java
+ * SimpleDataObject2.java
  *
  * Copyright (c) 2015 Kevin Laeufer <kevin.laeufer@rwth-aachen.de>
  *
@@ -21,21 +21,13 @@
 
 import javax.ostfriesentee.Ostfriesentee;
 
-public class SimpleObjectUser
+public class SimpleDataObject2
 {
-	private SimpleObject simple;
+	public int c;
+	public int d;
 
-	public SimpleObjectUser(String dummy) {
-		this.simple = new SimpleObject(400,300);
-	}
-
-	public SimpleObject getSimple(String dummy) { return this.simple; }
-
-	public void print(SimpleDataObject obj) {
-		Ostfriesentee.print("SimpleDataObject(a=" + obj.a + ", b=" + obj.b + ")\n");
-	}
-
-	public void print(SimpleDataObject2 obj) {
-		Ostfriesentee.print("SimpleDataObject2(c=" + obj.c + ", d=" + obj.d + ")\n");
+	public SimpleDataObject2(int c, int d) {
+		this.c = c;
+		this.d = d;
 	}
 }

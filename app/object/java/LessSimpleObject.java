@@ -21,21 +21,20 @@
 
 import javax.ostfriesentee.Ostfriesentee;
 
-public class SimpleObjectUser
+public class LessSimpleObject extends SimpleObject
 {
-	private SimpleObject simple;
+	private short b;
+	private byte c;
 
-	public SimpleObjectUser(String dummy) {
-		this.simple = new SimpleObject(400,300);
+	public LessSimpleObject(int a, short b, byte c) {
+		super(a,b);
+		Ostfriesentee.print("\nLessSimpleObject Constructor: begin\n\n");
+		this.b = b;
+		Ostfriesentee.print("this.b = " + b + ";\n");
+		this.c = c;
+		Ostfriesentee.print("this.c = " + c + ";\n");
+		Ostfriesentee.print("\nLessSimpleObject Constructor: end\n\n");
 	}
 
-	public SimpleObject getSimple(String dummy) { return this.simple; }
-
-	public void print(SimpleDataObject obj) {
-		Ostfriesentee.print("SimpleDataObject(a=" + obj.a + ", b=" + obj.b + ")\n");
-	}
-
-	public void print(SimpleDataObject2 obj) {
-		Ostfriesentee.print("SimpleDataObject2(c=" + obj.c + ", d=" + obj.d + ")\n");
-	}
+	public int getC() { return this.c; }
 }
