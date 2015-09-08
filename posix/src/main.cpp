@@ -150,7 +150,7 @@ int main(int /*argc*/,char* /*argv*/[])
 	// try to create an instance of SimpleObject class
 	SimpleObject simple(inf, 200, 300);
 
-	// std::cout << "simple.getA() = " << simple.getA() << std::endl;
+	std::cout << "simple.getA() = " << simple.getA() << std::endl;
 
 	// try to access values
 	auto sim = simple.getUnderlying();
