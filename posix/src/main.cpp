@@ -71,13 +71,9 @@ std::ostream &operator<<(std::ostream &os, String const &str) {
 
 int main(int /*argc*/,char* /*argv*/[])
 {
-
-	// initialise memory manager
-	dj_mem_init(mem, MEMSIZE);
-	ref_t_base_address = (char*)mem - 42;
-
 	// Create a new VM
 	Vm vm;
+	vm.initialize(mem);
 	vm.makeActiveVm();
 
 	// load libraries
@@ -152,7 +148,7 @@ int main(int /*argc*/,char* /*argv*/[])
 	}
 
 	// try to create an instance of SimpleObject class
-	jlib_object::SimpleObject simple(inf, 200, 300);
+	SimpleObject simple(inf, 200, 300);
 
 	// std::cout << "simple.getA() = " << simple.getA() << std::endl;
 
