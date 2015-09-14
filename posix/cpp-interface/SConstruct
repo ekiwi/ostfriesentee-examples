@@ -19,7 +19,7 @@
 
 import os
 
-env = Environment(toolpath = [os.path.join('..', 'ostfriesentee', 'scons')], tools = ['default', 'ostfriesentee'])
+env = Environment(toolpath = [os.path.join('..', '..', 'ostfriesentee', 'scons')], tools = ['default', 'ostfriesentee'])
 env.Architecture("amd64")
 
 if ARGUMENTS.get('debug', None):

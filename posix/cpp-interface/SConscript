@@ -25,10 +25,10 @@ Import('env')
 #app_name = 'benchmark'
 #app_name = 'testsuite'
 app_name = 'object'
-app_path = '../app'
+app_path = '../../app'
 
 # dependencies
-vm = SConscript(['../ostfriesentee/vm/SConscript'], exports = 'env')
+vm = SConscript(['../../ostfriesentee/vm/SConscript'], exports = 'env')
 app = SConscript(['{}/{}/SConscript'.format(app_path, app_name)], exports = 'env')
 
 app_di  = os.path.join(env['OFT_BUILDPATH'], 'app', app_name, app_name + '.di')
