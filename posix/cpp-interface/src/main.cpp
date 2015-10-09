@@ -43,15 +43,16 @@ extern "C"
 #include "pointerwidth.h"
 }
 
-#include "SimpleObject.hpp"
-
+#include<jlib_object.hpp>
 #include <hpp/ostfriesentee.hpp>
 using namespace ostfriesentee;
 
 char * ref_t_base_address;
 
-extern unsigned char di_archive_data[];
-extern size_t di_archive_size;
+extern unsigned char di_lib_archive_data[];
+extern size_t di_lib_archive_size;
+extern unsigned char di_app_data[];
+extern size_t di_app_size;
 
 uint8_t mem[MEMSIZE];
 
@@ -69,13 +70,9 @@ std::ostream &operator<<(std::ostream &os, String const &str) {
 
 int main(int /*argc*/,char* /*argv*/[])
 {
-
-	// initialise memory manager
-	dj_mem_init(mem, MEMSIZE);
-	ref_t_base_address = (char*)mem - 42;
-
-	// Create a new VM
+	// initialize a new VM
 	Vm vm;
+	vm.initialize(mem);
 	vm.makeActiveVm();
 
 	dj_named_native_handler handlers[] = {
@@ -83,18 +80,23 @@ int main(int /*argc*/,char* /*argv*/[])
 			{ "ostfriesentee", &ostfriesentee_native_handler }
 		};
 
+	// load libraries
 	int length = sizeof(handlers)/ sizeof(handlers[0]);
-	dj_archive archive;
-	archive.start = (dj_di_pointer)di_archive_data;
-	archive.end = (dj_di_pointer)(di_archive_data + di_archive_size);
-
-	vm.loadInfusionArchive(archive, handlers, length);
+	dj_archive lib_archive;
+	lib_archive.start = (dj_di_pointer)di_lib_archive_data;
+	lib_archive.end = (dj_di_pointer)(di_lib_archive_data + di_lib_archive_size);
+	vm.loadInfusionArchive(lib_archive, handlers, length);
 
 	// pre-allocate an OutOfMemoryError object
 	dj_object* obj = vm.createSysLibObject(BASE_CDEF_java_lang_OutOfMemoryError);
 	dj_mem_setPanicExceptionObject(obj);
 
-	// start the main execution loop
+	// initialize libraries
+	vm.run();
+
+	// load application
+	vm.loadInfusion(di_app_data);
+
 	vm.run();
 
 /*
@@ -142,7 +144,7 @@ int main(int /*argc*/,char* /*argv*/[])
 	}
 
 	// try to create an instance of SimpleObject class
-	jlib_object::SimpleObject simple(inf, 200, 300);
+	SimpleObject simple(inf, 200, 300);
 
 	std::cout << "simple.getA() = " << simple.getA() << std::endl;
 

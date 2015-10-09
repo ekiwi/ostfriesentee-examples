@@ -19,6 +19,12 @@
 
 import os
 
+#app_name = 'helloworld'
+#app_name = 'benchmark'
+#app_name = 'testsuite'
+app_name = 'object'
+app_path = '../../app'
+
 env = Environment(toolpath = [os.path.join('..', '..', 'ostfriesentee', 'scons')], tools = ['default', 'ostfriesentee'])
 env.Architecture("amd64")
 
@@ -26,7 +32,20 @@ if ARGUMENTS.get('debug', None):
 	env.Append(CCFLAGS = '-g')
 	env.Append(CCFLAGS = '-DDARJEELING_DEBUG')
 
-posix = SConscript(['SConscript'], exports = 'env')
+# load ostfriesentee
+runtime = env.OstfriesenteeRuntime(['base', 'util', 'ostfriesentee'])
+runtime_c = [ff for ff in runtime if str(ff).endswith(".c")]
+runtime_a = [ff for ff in runtime if str(ff).endswith(".a")]
+
+app = SConscript(['{}/{}/SConscript'.format(app_path, app_name)], exports = 'env')
+app_di  = os.path.join(env['OFT_BUILDPATH'], 'app', app_name, app_name + '.di')
+app_inc = os.path.join(env['OFT_BUILDPATH'], 'app', app_name)
+app_archive = env.CArray("build/posix/generated/di_app.c", app_di)
+
+env.AppendUnique(LIBS = runtime_a)
+env.Append(CPPPATH = app_inc)
+env.VariantDir(variant_dir='build/posix', src_dir='src')
+posix = env.Program('build/posix/main', env.Glob('build/posix/*.c') + env.Glob('build/posix/*.cpp') + app_archive + runtime_c)
 
 env.Alias('posix', posix)
 env.Alias('run', env.Run(posix))
