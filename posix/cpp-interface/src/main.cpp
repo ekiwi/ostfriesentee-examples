@@ -99,41 +99,7 @@ int main(int /*argc*/,char* /*argv*/[])
 
 	vm.run();
 
-/*
-	std::cout << std::endl << "---------------------------" << std::endl;
-
-	// list some information that can be gathered from the infusions
-	Infusion inf = vm.firstInfusion();
-	while(inf.isValid()) {
-		std::cout << std::endl << "Infusion: " << inf.getName() << std::endl;
-
-		ClassList classes = inf.getClassList();
-		std::cout << "Number of classes: " << static_cast<int>(classes.getSize()) << std::endl;
-		for(uint8_t ii = 0; ii < classes.getSize(); ++ii) {
-			ClassDefinition def = classes.getElement(ii);
-			int numberOfInterfaces = def.getNumberOfInterfaces();
-			std::cout << "Superclass: " << def.getSuperClass() << std::endl;
-			std::cout << "Name: " << def.getNameId() << std::endl;
-			std::cout << "Interfaces: " << numberOfInterfaces << std::endl;
-		}
-
-		List methods = inf.getMethodImplementationList();
-		std::cout << "Number of methods: " << static_cast<int>(methods.getSize()) << std::endl;
-
-		StringTable strings = inf.getStringTable();
-		std::cout << "Number of strings: " << static_cast<int>(strings.getSize()) << std::endl;
-		for(uint16_t ii = 0; ii < strings.getSize(); ++ii) {
-			std::cout << strings.getString(ii) << std::endl;
-		}
-
-		inf = inf.next();
-	}
-
-
-	std::cout << std::endl << "---------------------------" << std::endl;
-	std::cout << "searching for infusion `object`..... ";
-*/
-	// fin events infusion
+	// find events infusion
 	Infusion inf = vm.firstInfusion();
 	while(inf.isValid()) {
 		if(strcmp(inf.getName(), "object") == 0) {
@@ -153,9 +119,16 @@ int main(int /*argc*/,char* /*argv*/[])
 	std::cout << "sim.a = " << sim->a << std::endl;
 	std::cout << "sim.b = " << sim->b << std::endl;
 
-	//_OBJECT_STRUCT_LessSimpleObject* lessSimpleObject = (_OBJECT_STRUCT_LessSimpleObject*)simple;
-	//std::cout << "lessSimpleObject.b = " << lessSimpleObject->b << std::endl;
-	//std::cout << "lessSimpleObject.c = " << lessSimpleObject->c << std::endl;
+	// derrived object
+	DerivedObject derived(inf, 400, 500, 600);
+
+	std::cout << "derived.getB()      = " << derived.getB() << std::endl;
+	std::cout << "derived.getSuperB() = " << derived.getSuperB() << std::endl;
+	std::cout << "derived.getC()      = " << derived.getC() << std::endl;
+
+	auto derived_data = derived.getUnderlying();
+	std::cout << "derived.b = " << derived_data->b << std::endl;
+	std::cout << "derived.c = " << derived_data->c << std::endl;
 
 	return 0;
 }

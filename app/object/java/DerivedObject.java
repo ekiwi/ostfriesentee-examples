@@ -1,5 +1,5 @@
 /*
- * HelloWorld.java
+ * DerivedObject.java
  *
  * Copyright (c) 2015 Kevin Laeufer <kevin.laeufer@rwth-aachen.de>
  *
@@ -21,20 +21,22 @@
 
 import javax.ostfriesentee.Ostfriesentee;
 
-public class SimpleObject
+public class DerivedObject extends SimpleObject
 {
-	private int a;
 	private int b;
+	private int c;
 
-	public SimpleObject(int a, int b) {
-		Ostfriesentee.print("\nSimpleObject Constructor: begin\n\n");
-		this.a = a;
-		Ostfriesentee.print("this.a = " + a + ";\n");
+	public DerivedObject(int a, int b, int c) {
+		super(a, -100);
+		Ostfriesentee.print("\nDerivedObject Constructor: begin\n\n");
 		this.b = b;
-		Ostfriesentee.print("this.b = " + b + ";\n");
-		Ostfriesentee.print("\nSimpleObject Constructor: end\n\n");
+		Ostfriesentee.print("this.b = " + this.b + ";\n");
+		this.c = c;
+		Ostfriesentee.print("this.c = " + this.c + ";\n");
+		Ostfriesentee.print("\nDerivedObject Constructor: end\n\n");
 	}
 
-	public int getA() { return this.a; }
 	public int getB() { return this.b; }
+	public int getC() { return this.c; }
+	public int getSuperB() { return super.getB(); }
 }
