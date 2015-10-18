@@ -27,6 +27,7 @@ void systick_interrupt();
 
 // Dummy Clock
 struct DummyClock {
+	static constexpr int Frequency = 8 * 1000 * 1000;
 	static constexpr int Usart1 = 8 * 1000 * 1000;
 };
 
@@ -38,8 +39,8 @@ MAIN_FUNCTION
 	Usart1::initialize<DummyClock, 115200>();
 
 	// enable systick timer
-	xpcc::cortex::SysTickTimer::enable();
-	xpcc::cortex::SysTickTimer::attachInterrupt(systick_interrupt);
+	xpcc::cortex::SysTickTimer::initialize<DummyClock>();
+	xpcc::cortex::SysTickTimer::attachInterruptHandler(systick_interrupt);
 
 	XPCC_LOG_INFO << "Ostfriesentee on STM32F0 powered by xpcc." << xpcc::endl;
 
